@@ -2,7 +2,8 @@ package messagebus
 
 type (
 	Message struct {
-		Body string
+		Body       string
+		RawMessage interface{}
 	}
 
 	MessageReader interface {

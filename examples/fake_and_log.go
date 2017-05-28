@@ -10,6 +10,10 @@ import (
 )
 
 type (
+	FakeMessage struct {
+		Body          string
+		ReceiptHandle string
+	}
 	FakeReader  struct{}
 	LogListener struct{}
 )
@@ -19,7 +23,12 @@ func (r *FakeReader) Read() []messagebus.Message {
 	var messages []messagebus.Message
 
 	for i := 0; i < c; i++ {
-		message := &messagebus.Message{Body: "foo"}
+		m := &FakeMessage{
+			Body:          "foo",
+			ReceiptHandle: "bar",
+		}
+
+		message := &messagebus.Message{Body: m.Body, RawMessage: &m}
 		messages = append(messages, *message)
 	}
 
