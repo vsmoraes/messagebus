@@ -7,6 +7,7 @@ type (
 
 	MessageReader interface {
 		Read() []Message
+		AckMessages(messages *[]Message)
 	}
 
 	MessageListener interface {

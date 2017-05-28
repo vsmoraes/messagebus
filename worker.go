@@ -25,5 +25,7 @@ func (w *Worker) Run(r MessageReader) {
 		for i := 0; i < len(w.Listeners); i++ {
 			go w.Listeners[i].Process(&messages)
 		}
+
+		r.AckMessages(&messages)
 	}
 }

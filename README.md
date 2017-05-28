@@ -31,10 +31,15 @@ func (r *FakeReader) Read() []messagebus.Message {
 	return messages
 }
 
+func (r *FakeReader) AckMessages(messages *[]messagebus.Message) {
+	c := len(*messages)
+	log.Println(strconv.Itoa(c) + " messages acknowledged")
+}
+
 func (l *LogListener) Process(messages *[]messagebus.Message) {
 	c := len(*messages)
 	time.Sleep(time.Second * 5)
-	log.Println(strconv.Itoa(c) + " messages received")
+	log.Println(strconv.Itoa(c) + " messages processed")
 }
 
 func main() {
